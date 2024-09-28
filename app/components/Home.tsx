@@ -40,7 +40,7 @@ export default function Home({ locations }: { locations: Location[] }) {
 
   useEffect(() => {
     // Simulate fetching weather data
-    const getWeatherForecast = (location: string): WeatherData[] => {
+    const getWeatherForecast = (): WeatherData[] => {
       return Array(7).fill(null).map((_, i) => ({
         day: i + 1,
         temp: Math.round(Math.random() * 15 + 10),
@@ -49,8 +49,8 @@ export default function Home({ locations }: { locations: Location[] }) {
     }
 
     setWeatherData({
-      vlezenbeek: getWeatherForecast('Vlezenbeek'),
-      portugal: getWeatherForecast('Portugal')
+      vlezenbeek: getWeatherForecast(),
+      portugal: getWeatherForecast()
     });
   }, []);
 
