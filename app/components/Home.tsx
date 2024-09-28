@@ -21,15 +21,26 @@ interface Location {
   plots: Plot[];
 }
 
+interface WeatherData {
+  day: number;
+  temp: number;
+  condition: string;
+}
+
+interface WeatherState {
+  vlezenbeek: WeatherData[];
+  portugal: WeatherData[];
+}
+
 export default function Home({ locations }: { locations: Location[] }) {
-  const [weatherData, setWeatherData] = useState({
+  const [weatherData, setWeatherData] = useState<WeatherState>({
     vlezenbeek: [],
     portugal: []
   });
 
   useEffect(() => {
     // Simulate fetching weather data
-    const getWeatherForecast = (location: string) => {
+    const getWeatherForecast = (location: string): WeatherData[] => {
       return Array(7).fill(null).map((_, i) => ({
         day: i + 1,
         temp: Math.round(Math.random() * 15 + 10),
