@@ -1,5 +1,5 @@
 import React from 'react'
-import { Chart, ChartOptions } from 'react-chartjs-2'
+import { Chart } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions
 } from 'chart.js'
 
 ChartJS.register(
@@ -137,18 +138,18 @@ export default function VarietyDetails({ id }: { id: string }) {
     },
     scales: {
       y: {
-        type: 'linear',
+        type: 'linear' as const,
         display: true,
-        position: 'left',
+        position: 'left' as const,
         title: {
           display: true,
           text: 'Temperatuur (°C) / Zonuren',
         },
       },
       y1: {
-        type: 'linear',
+        type: 'linear' as const,
         display: true,
-        position: 'right',
+        position: 'right' as const,
         title: {
           display: true,
           text: 'Regenval (mm)',
