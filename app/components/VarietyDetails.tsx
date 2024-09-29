@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartData,
   ChartOptions
 } from 'chart.js'
 
@@ -101,31 +102,31 @@ export default function VarietyDetails({ id }: { id: string }) {
   const sowingDate = new Date(variety.sowingDate)
   const daysSinceSowing = Math.floor((today.getTime() - sowingDate.getTime()) / (1000 * 3600 * 24))
 
-  const chartData = {
+  const chartData: ChartData<'bar'> = {
     labels: variety.weatherData.map(d => d.date),
     datasets: [
       {
+        type: 'line' as const,
         label: 'Temperatuur (°C)',
         data: variety.weatherData.map(d => d.temperature),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
         yAxisID: 'y',
-        type: 'line' as const,
       },
       {
+        type: 'line' as const,
         label: 'Zonuren',
         data: variety.weatherData.map(d => d.sunHours),
         borderColor: 'rgb(255, 205, 86)',
         backgroundColor: 'rgba(255, 205, 86, 0.5)',
         yAxisID: 'y',
-        type: 'line' as const,
       },
       {
+        type: 'bar' as const,
         label: 'Regenval (mm)',
         data: variety.weatherData.map(d => d.rainfall),
         backgroundColor: 'rgba(54, 162, 235, 0.5)',
         yAxisID: 'y1',
-        type: 'bar' as const,
       },
     ],
   }
@@ -133,7 +134,7 @@ export default function VarietyDetails({ id }: { id: string }) {
   const chartOptions: ChartOptions<'bar'> = {
     responsive: true,
     interaction: {
-      mode: 'index',
+      mode: 'index' as const,
       intersect: false,
     },
     scales: {
