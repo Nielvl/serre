@@ -1,29 +1,8 @@
 import React from 'react'
+import { Chart as ChartJS, ChartData, ChartOptions, registerables } from 'chart.js'
 import { Chart } from 'react-chartjs-2'
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartData,
-  ChartOptions
-} from 'chart.js'
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-)
+ChartJS.register(...registerables)
 
 interface Treatment {
   date: string
@@ -102,7 +81,7 @@ export default function VarietyDetails({ id }: { id: string }) {
   const sowingDate = new Date(variety.sowingDate)
   const daysSinceSowing = Math.floor((today.getTime() - sowingDate.getTime()) / (1000 * 3600 * 24))
 
-  const chartData: ChartData<'bar'> = {
+  const chartData: ChartData<'bar' | 'line'> = {
     labels: variety.weatherData.map(d => d.date),
     datasets: [
       {
@@ -131,7 +110,7 @@ export default function VarietyDetails({ id }: { id: string }) {
     ],
   }
 
-  const chartOptions: ChartOptions<'bar'> = {
+  const chartOptions: ChartOptions<'bar' | 'line'> = {
     responsive: true,
     interaction: {
       mode: 'index' as const,
